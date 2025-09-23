@@ -1,0 +1,147 @@
+-- SELECT name  -- 01
+-- FROM instructor
+--     WHERE dept_name = 'Finance'
+-- ORDER BY name ASC;
+-- SELECT title -- 02
+-- FROM course
+--     WHERE dept_name = 'Biology' AND credits >= 3
+-- ORDER BY title ASC;
+-- SELECT name -- 03
+-- FROM student
+--     WHERE dept_name = 'Comp. Sci.' AND tot_cred > 50
+-- ORDER BY name ASC;
+-- SELECT I.name -- 04
+-- FROM instructor AS I JOIN teaches AS T 
+-- ON I.ID  = T.ID
+--     WHERE T.year = '2010' AND T.semester = 'Summer'
+-- ORDER BY I.name ASC
+-- SELECT I.name -- 04
+-- FROM instructor AS I ,teaches AS T 
+--     WHERE I.ID = T.ID AND T.year = '2010' AND T.semester = 'Summer'
+-- ORDER BY I.name ASC;
+-- SELECT SUM(salary) -- 05
+-- FROM instructor
+--     WHERE dept_name = 'Comp. Sci.';
+-- SELECT COUNT  (DISTINCT ID) -- 06
+-- FROM instructor
+--     WHERE dept_name = "Finance";
+-- SELECT name -- 07
+-- FROM student
+--     WHERE tot_cred = (SELECT MAX(tot_cred) FROM student);
+-- SELECT T.course_id, C.title, T.year, T.semester  --08 
+-- FROM course as C
+-- JOIN takes as T ON C.course_id = T.course_id
+--     WHERE T.ID =  '45678'
+-- ORDER BY course_id ;
+-- SELECT S.name -- 09
+-- FROM student AS S
+-- INNER JOIN advisor AS A ON S.ID = A.s_ID
+-- INNER JOIN instructor AS I ON I.ID = A.i_ID
+-- WHERE I.name = 'Einstein'
+-- ORDER BY S.name ASC;
+-- SELECT printf("%-10s", C.title) AS title -- 10
+-- FROM course AS C
+--     JOIN prereq AS PQ ON PQ.prereq_id = C.course_id
+-- GROUP BY C.title
+-- ORDER BY COUNT(*) DESC,
+--     C.title ASC
+-- LIMIT 1;
+-- SELECT DISTINCT S.name -- 11
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN course AS C ON T.course_id = C.course_id
+--      WHERE C.dept_name = 'Comp. Sci.'
+-- ORDER BY S.name ASC;
+-- SELECT I.ID -- 12
+-- FROM instructor AS I
+-- LEFT JOIN teaches AS T ON I.ID = T.ID
+--      WHERE T.ID IS NULL
+-- ORDER BY I.ID ASC;
+-- SELECT I.name -- 13
+-- FROM instructor AS I
+-- LEFT JOIN teaches AS T ON I.ID = T.ID
+--      WHERE T.ID IS NULL
+-- ORDER BY I.name ASC;
+-- SELECT COUNT(T.ID) AS count_ID
+-- FROM takes AS T
+--     JOIN course AS C ON C.course_id = T.course_id
+-- WHERE T.grade = "A"
+--     AND C.title = "Intro. to Computer Science";
+-- SELECT printf("%-26s", C.title) AS title,
+--     printf("%-10s", T.year) AS year,
+--     printf("%-10s", T.semester) AS semester,
+--     printf("%-10s", T.grade) AS grade -- 15
+-- FROM takes AS T
+--     JOIN course AS C ON C.course_id = T.course_id
+--     JOIN student AS S ON S.ID = T.ID
+-- WHERE S.name = "Shankar"
+-- ORDER BY C.title ASC;
+-- SELECT C.title -- 16
+-- FROM course AS C
+--     WHERE C.course_id LIKE "CS-1%"
+-- ORDER BY C.title DESC ;
+-- SELECT I.dept_name -- 17
+-- FROM instructor AS I 
+--     WHERE I.salary BETWEEN 60000 AND 80000
+-- ORDER BY I.dept_name ASC;
+-- SELECT I.name, I.salary -- 18
+-- FROM instructor AS I 
+-- ORDER BY I.salary ASC;
+-- SELECT I.dept_name, AVG(I.salary) -- 19
+-- FROM instructor AS I 
+-- GROUP BY I.dept_name
+--     HAVING AVG(I.salary) > 40000
+-- ORDER BY I.dept_name ASC;
+-- SELECT I.name  -- 20
+-- FROM instructor AS I 
+--     WHERE I.salary >  ANY (SELECT I.salary FROM instructor AS I
+--                                 WHERE I.dept_name = "Biology")
+-- -- ORDER BY I.name ASC;
+
+-- SELECT  *
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN section AS Sec ON T.course_id = Sec.course_id AND T.sec_id = Sec.sec_id AND T.semester = Sec.semester AND T.year = Sec.year
+-- JOIN classroom AS C ON Sec.room_number = C.room_number AND Sec.building = C.building
+-- WHERE C.building = "Packard"
+-- AND 
+-- SELECT  *
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN section AS Sec ON T.course_id = Sec.course_id AND T.sec_id = Sec.sec_id AND T.semester = Sec.semester AND T.year = Sec.year
+-- JOIN classroom AS C ON Sec.room_number = C.room_number AND Sec.building = C.building
+-- WHERE C.building = "Watson"
+
+-- ORDER BY S.ID ASC;
+
+
+-- SELECT S.ID, C.building
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN section AS Sec ON T.course_id = Sec.course_id AND T.sec_id = Sec.sec_id AND T.semester = Sec.semester AND T.year = Sec.year
+-- JOIN classroom AS C ON Sec.room_number = C.room_number AND Sec.building = C.building
+-- WHERE S.ID = '76543';
+-- SELECT S.ID AS pid
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN section AS Sec ON T.course_id = Sec.course_id AND T.sec_id = Sec.sec_id AND T.semester = Sec.semester AND T.year = Sec.year
+-- JOIN classroom AS C ON Sec.room_number = C.room_number AND Sec.building = C.building
+-- WHERE C.building IN ("Packard", "Watson")
+-- GROUP BY S.ID
+-- HAVING SUM(C.building = "Packard") > 0 AND SUM(C.building = "Watson") > 0
+-- ORDER BY S.ID ASC;
+-- SELECT S.ID, C.building
+-- FROM student AS S
+-- JOIN takes AS T ON S.ID = T.ID
+-- JOIN section AS Sec ON T.course_id = Sec.course_id AND T.sec_id = Sec.sec_id AND T.semester = Sec.semester AND T.year = Sec.year
+-- JOIN classroom AS C ON Sec.room_number = C.room_number AND Sec.building = C.building
+-- WHERE S.ID = '76543';
+
+
+SELECT 
+    I.dept_name  as dept_name, 
+    ROUND(AVG(I.salary), 4) as avg_sal-- 19
+FROM instructor AS I 
+GROUP BY I.dept_name
+    HAVING AVG(I.salary) > 40000
+ORDER BY I.dept_name ASC;

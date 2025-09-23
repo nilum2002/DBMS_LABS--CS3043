@@ -1,0 +1,163 @@
+mysql> SELECT name from instructor where dept_name = "Biology";
++-------+
+| name  |
++-------+
+| Crick |
++-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT title FROM course WHERE credits = 3 AND dept_name = "Physics";
+Empty set (0.00 sec)
+
+mysql> SELECT name FROM instructors WHERE salary > 50000 AND dept_name = "Physics";
+ERROR 1146 (42S02): Table 'labs.instructors' doesn't exist
+mysql> SELECT name FROM instructor WHERE salary > 50000 AND dept_name = "Physics";
++----------+
+| name     |
++----------+
+| Einstein |
+| Gold     |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT name FROM student WHERE tot_cred >= 100
+    -> ^C
+mysql> SELECT name FROM student WHERE tot_cred >= 100;
++--------+
+| name   |
++--------+
+| Zhang  |
+| Chavez |
+| Tanaka |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT name FROM student WHERE tot_cred >= 100 ORDER BY tot_cred DESC;
++--------+
+| name   |
++--------+
+| Tanaka |
+| Chavez |
+| Zhang  |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT d.building FORM instructor AS i JOIN department AS d ON i.dept_name = d.dept_name WHERE i.name = "Mozart"
+    -> 
+    -> ^C
+mysql> SELECT d.building FORM instructor AS i JOIN department AS d ON i.dept_name = d.dept_name WHERE i.name = "Mozart";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instructor AS i JOIN department AS d ON i.dept_name = d.dept_name WHERE i.name =' at line 1
+mysql> SELECT d.building FORM instructor AS i JOIN department AS d ON i.dept_name = d.dept_name WHERE i.name = "Mozart";
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'instructor AS i JOIN department AS d ON i.dept_name = d.dept_name WHERE i.name =' at line 1
+mysql> SELECT name, salary
+    -> FROM instructor
+    -> WHERE dept_name = 'Computer Science'
+    ->   AND salary > 75000
+    -> ORDER BY salary DESC;
+Empty set (0.00 sec)
+
+mysql> ORDER BY salary DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY salary DESC' at line 1
+mysql> SELECT name FROM student WHERE tot_cred >= 100 ORDER BY tot_cred DESC;
++--------+
+| name   |
++--------+
+| Tanaka |
+| Chavez |
+| Zhang  |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT name FROM student WHERE tot_cred >= 100 ORDER BY tot_cred DESC;
++--------+
+| name   |
++--------+
+| Tanaka |
+| Chavez |
+| Zhang  |
++--------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT s.name
+    -> FROM student s
+    -> JOIN takes t ON s.ID = t.ID
+    -> JOIN course c ON t.course_id = c.course_id
+    -> WHERE c.dept_name = 'Computer Science'
+    -> ORDER BY s.name ASC;
+Empty set (0.00 sec)
+
+mysql> ORDER BY s.name ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY s.name ASC' at line 1
+mysql> ORDER BY s.name ASC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY s.name ASC' at line 1
+mysql> WHERE c.dept_name = 'Computer Science'
+    -> WHERE c.dept_name = 'Computer Science'
+    -> 
+    -> 
+    -> 
+    -> ^C
+mysql> 
+mysql> view tables;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'view tables' at line 1
+mysql> show tables ;
++----------------+
+| Tables_in_labs |
++----------------+
+| advisor        |
+| classroom      |
+| course         |
+| department     |
+| instructor     |
+| prereq         |
+| section        |
+| student        |
+| takes          |
+| teaches        |
+| time_slot      |
++----------------+
+11 rows in set (0.01 sec)
+
+mysql> select d.building from instructor as i join department as d on i.dept_name = d.dept_name where i.name = 'Mozart';
++----------+
+| building |
++----------+
+| Packard  |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select d.building from department as d join instructer as i on i.dept_name = d.dept_name where i.name = 'Mozart';
+ERROR 1146 (42S02): Table 'labs.instructer' doesn't exist
+mysql> select d.building from department as d join instructor as i on i.dept_name = d.dept_name where i.name = 'Mozart';
++----------+
+| building |
++----------+
+| Packard  |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select c.course_id from course as c join section as s on c.course_id = s.course_id where semester = 'Summer' and year = 2009 
+    -> ^C
+mysql> select c.course_id from course as c join section as s on c.course_id = s.course_id where semester = 'Summer' and year = 2009 ;
++-----------+
+| course_id |
++-----------+
+| BIO-101   |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select c.course_id from course as c join section as s on c.course_id = s.course_id where semester = 'Summer' and year = 2009  order by c.course_id;
++-----------+
+| course_id |
++-----------+
+| BIO-101   |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select c.course_id from course as c join section as s on c.course_id = s.course_id where semester = 'Summer' and year = 2009  order by course_id;
++-----------+
+| course_id |
++-----------+
+| BIO-101   |
++-----------+
+1 row in set (0.00 sec)
+

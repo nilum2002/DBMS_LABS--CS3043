@@ -1,0 +1,54 @@
+
+
+-- create table if not exists grade_point(
+--     grade varchar(5),
+--     point float,
+--     primary key (grade)
+-- );
+
+-- INSERT INTO grade_point , VALUES ("A+", 4.2) , ("A", 4.0), ("A-", 3.7), ("B+", 3.5), ("B", 3.0), ("B-", 2.7), ("C+", 2.3), ("C", 2.0), ("C-", 1.5), ("D", 1.0);
+
+
+-- SELECT S.name as student_name , SUM(G.point) as total_gp
+-- FROM student S
+-- LEFT JOIN takes as T on S.ID = T.ID
+-- LEFT JOIN grade_point as G on G.grade = T.grade
+-- GROUP BY S.ID, S.name
+-- ORDER BY total_gp DESC ;
+
+-- CREATE FUNCTION count_students_in_course(course_id_input VARCHAR(10))
+-- RETURNS  INTEGER
+-- DETERMINISTIC
+-- BEGIN
+--     DECLARE student_count INTEGER;
+--     SET student_count = (
+--     SELECT COUNT(DISTINCT ID) 
+--     FROM takes 
+--     WHERE course_id = course_id_input);
+--     RETURN student_count;
+-- END;
+
+-- SELECT course_id
+-- FROM takes
+-- GROUP BY course_id
+-- HAVING count_students_in_course(course_id) > 5
+-- ORDER BY course_id ASC;
+-- CREATE TRIGGER check_grade_before_insert
+-- BEFORE INSERT ON takes
+-- FOR EACH ROW
+-- SET NEW.grade = IF(NEW.grade IN ('A+', 'A-', 'A', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D'), NEW.grade, NULL);
+
+
+-- CREATE VIEW faculty  AS 
+-- SELECT ID, name , dept_name
+-- FROM instructor
+
+
+-- CREATE USER 'uomcse@localhost' IDENTIFIED BY 'uomcse123';
+
+
+
+-- GRANT SELECT ON  faculty to 'uomcse@localhost';
+
+
+-- GRANT all ON  takes to 'uomcse@localhost';

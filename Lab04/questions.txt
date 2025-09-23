@@ -1,0 +1,42 @@
+Create a view named faculty so that the information about lecturers in all departments can be shown without showing / giving access to the salary details and show all the records of the resulting view.
+
+
+Marked out of 1.00
+Flag question
+Question text
+Create a view named faculty so that the information about lecturers in all departments can be shown without showing / giving access to the salary details. Show all the instructors from the Biology department. 
+
+Create a view named department_info so that the information about departments for all departments can be shown without showing / giving access to the budget details and show all the records of the resulting view. 
+
+Answer:(penalty regime: 10, 20, ... %)
+
+
+
+Create a view named instructor_loc using two views (faculty, department_info) created in the previous cases, so that we can display/give access to information about the building locations for all instructors and show all the records of the resulting view.
+
+
+Answer:(penalty regime: 10, 20, ... %)
+
+
+
+
+You are required to add images of instructors to the database. Write a query as to how you would modify the database/ instructor table to complete the requirement. Then show the updated structure of the instructor table. (Use 'Image' as the new attribute name. In MySQL, you can use DESCRIBE command to show table structure. In SQLite, you can use the PRAGMA command to show table structure)
+
+
+Show a list of course names with their respective pre-requisite course names. Note the output should only contain course names. (Order the results by course title in the ascending order)
+
+
+Show a list of students with their respective instructors who advise them. (The result should only contain student and instructor names). Order the results by student name in the ascending order.
+Answer:(penalty regime: 10, 20, ... %)
+
+
+Display a list of all instructors, showing their ID, name, and the number of sections that they have taught. Make sure to show the number of sections as 0 for instructors who have not taught any section. Your query should use an outer join. (Order the results by the instructor name in the ascending order)
+
+
+Answer:(penalty regime: 10, 20, ... %)
+
+
+Insert the record ('CS-101','2','Spring','2010','Packard','101','E') to the section relation. Insert the record ('10101','CS-101','1','Spring','2010') to the teaches relation. Then display the list of all course sections offered in Spring 2010, along with the names of the instructors teaching the section. If a section has more than one instructor, it should appear as many times in the result as it has instructors. If it does not have any instructor, it should still appear in the result with the instructor name set to null. (Order the results by the course_id, then by the sec_id and then by the instructor name in the ascending order)
+
+
+Insert a record with values ('Mechanical', 'Watson', 90000) to the Department relation. Then display the list of all departments, with the total number of instructors in each department, using OUTER/INNER JOIN operations. Make sure to correctly handle departments with no instructors. (Order the results by the department name in the ascending order)
